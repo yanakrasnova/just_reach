@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from . import candidates as c
 
+# create radar based on some detected holes
 def extract_features(img):
     gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 

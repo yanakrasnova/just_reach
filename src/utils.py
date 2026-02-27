@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 
 
-def keypoints_2_heatmap(img, kp_arr):
+def keypoints_2_matrix(img, kp_arr):
     h, w = img.shape[:2]
     kp_matrix = np.zeros(img.shape[:2], dtype=np.uint8)
 
@@ -14,9 +14,12 @@ def keypoints_2_heatmap(img, kp_arr):
         if 0 <= y < h and 0 <= x < w:
             kp_matrix[y, x] = 255
             coords_list.append((x, y))
-
-    kp_heatmap = cv2.GaussianBlur(kp_matrix, (15, 15), 0)
     
+    return kp_matrix, coords_list
+
+def keypoints_2_heatmap(img, kp_arr):
+    kp_matrix, coords_list = keypoints_2_matrix(img, kp_arr)
+    kp_heatmap = cv2.GaussianBlur(kp_matrix, (15, 15), 0)
     return kp_heatmap, coords_list
 
 def extract_patch(img, x_center, y_center, size):

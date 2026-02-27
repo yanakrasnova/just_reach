@@ -84,9 +84,10 @@ def get_combined_candidates(img):
     bilateral = cv2.bilateralFilter(img, 9, 50, 50)  
     bil_gray_image = cv2.cvtColor(bilateral, cv2.COLOR_BGR2GRAY)
     
-    _, hough_circles_coords = hough_circles_heatmap(bil_gray_image)
+    #_, hough_circles_coords = hough_circles_heatmap(bil_gray_image)
     _, blob_coords = blob_heatmap(gray_image)
     
-    comb_coords = list(set(hough_circles_coords) | set(blob_coords))
+    #comb_coords = list(set(hough_circles_coords) | set(blob_coords))
+    comb_coords = set(blob_coords)
     
     return comb_coords
